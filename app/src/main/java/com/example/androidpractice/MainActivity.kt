@@ -1,22 +1,24 @@
  package com.example.androidpractice
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 
  class MainActivity : AppCompatActivity() {
 
-     private lateinit var btnToast: Button
+     private lateinit var btnOpenActivity: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnToast = findViewById(R.id.btnToast)
+        btnOpenActivity = findViewById(R.id.btnOpenActivity)
 
-        btnToast.setOnClickListener{
-            Toast.makeText(this, "I am a Toast", Toast.LENGTH_LONG).show()
+        btnOpenActivity.setOnClickListener {
+            Intent(this, SecondActivity::class.java).also {
+                startActivity(it)
+            }
         }
 
     }
