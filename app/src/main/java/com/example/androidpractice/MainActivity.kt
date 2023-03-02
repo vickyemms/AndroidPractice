@@ -1,39 +1,32 @@
  package com.example.androidpractice
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 
  class MainActivity : AppCompatActivity() {
-
-     private lateinit var btnChoosePhoto: Button
-     private  lateinit var ivPhoto: ImageView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        btnChoosePhoto = findViewById(R.id.btnChoosePhoto)
-        ivPhoto = findViewById(R.id.ivPhoto)
-
-        btnChoosePhoto.setOnClickListener {
-            Intent(Intent.ACTION_GET_CONTENT).also {
-                it.type = "image/*"
-                startActivityForResult(it, 0)
-            }
-        }
     }
 
-     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-         super.onActivityResult(requestCode, resultCode, data)
-         if(resultCode == Activity.RESULT_OK && requestCode == 0){
-             val uri = data?.data
-             ivPhoto.setImageURI(uri)
+     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+         menuInflater.inflate(R.menu.app_bar_menu, menu)
+         return true
+     }
+
+     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         when(item.itemId){
+             R.id.miAddContact -> Toast.makeText(this, "You clicked on Add Contact", Toast.LENGTH_LONG).show()
+             R.id.miFavorites -> Toast.makeText(this, "You clicked on Favorites", Toast.LENGTH_LONG).show()
+             R.id.miSettings -> Toast.makeText(this, "You clicked on Settings", Toast.LENGTH_LONG).show()
+             R.id.miFeedback -> Toast.makeText(this, "You clicked on Give Feedback", Toast.LENGTH_LONG).show()
+             R.id.miClose -> finish()
          }
+         return true
      }
 
  }
